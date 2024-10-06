@@ -1,4 +1,3 @@
-## Hi there 👋
 
 <!--
 **seamasZ/seamasZ** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
@@ -14,3 +13,5 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+![Banner](https://pica.zhimg.com/v2-c069aad1778cfa061f843515580a8d4e_r.jpg)
