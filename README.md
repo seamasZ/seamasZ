@@ -14,4 +14,4 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-![Banner](https://pica.zhimg.com/v2-c069aad1778cfa061f843515580a8d4e_r.jpg)
+<img src="https://pica.zhimg.com/v2-c069aad1778cfa061f843515580a8d4e_r.jpg" width="30%" alt="Banner">
