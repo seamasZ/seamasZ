@@ -3,286 +3,806 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图片展示主页</title>
+    <title>GitHub Profile - 开发者名称</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* 全局样式 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+        }
+
         body {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-            padding: 2rem;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-color) 0%, #1e1b4b 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* 霓虹标题 */
-        .neon-title {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
-            color: #fff;
-            text-shadow: 0 0 5px #ff6b9d, 0 0 20px #ff6b9d, 0 0 40px #ff6b9d;
-            animation: flicker 2s infinite alternate;
-        }
-        @keyframes flicker {
-            from { text-shadow: 0 0 5px #ff6b9d, 0 0 20px #ff6b9d; }
-            to { text-shadow: 0 0 10px #ff6b9d, 0 0 30px #ff6b9d, 0 0 60px #ff6b9d; }
-        }
-
-        /* 轮播容器 */
-        .carousel-container {
+        .container {
             max-width: 1200px;
             margin: 0 auto;
-            position: relative;
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
-        }
-        .carousel {
-            display: flex;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); /* 平滑过渡动画 */
-        }
-        .carousel-item {
-            flex-shrink: 0;
-            width: 100%;
-            height: 500px;
-            position: relative;
-        }
-        .carousel-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        /* 悬停放大特效 */
-        .carousel-item:hover .carousel-img {
-            transform: scale(1.05); /* 放大5% */
-        }
-        /* 图片描述遮罩 */
-        .img-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 1.5rem;
-            background: linear-gradient(transparent, rgba(0,0,0,0.7));
-            color: white;
-            font-size: 1.2rem;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        .carousel-item:hover .img-caption {
-            opacity: 1; /* 悬停显示描述 */
+            padding: 0 20px;
         }
 
-        /* 轮播控制按钮 */
-        .carousel-btn {
+        /* Header */
+        header {
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-bg {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, var(--primary-color) 0%, transparent 70%);
+            opacity: 0.1;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.1); opacity: 0.15; }
+        }
+
+        .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+            margin: 0 auto 30px;
+            display: block;
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .avatar:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 60px rgba(99, 102, 241, 0.5);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 2;
+            animation: slideInDown 1s ease-out;
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .title {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+            animation: slideInUp 1s ease-out 0.2s both;
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1s ease-out 0.4s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            border: none;
-            background: rgba(255,255,255,0.8);
-            color: #ff6b9d;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .carousel-btn:hover {
-            background: #ff6b9d;
-            color: white;
-            box-shadow: 0 0 15px #ff6b9d;
-        }
-        .prev-btn { left: 20px; }
-        .next-btn { right: 20px; }
 
-        /* 指示器圆点 */
-        .indicators {
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-5px);
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 60px 0;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
             position: absolute;
-            bottom: 20px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-top: 10px;
+        }
+
+        /* Repositories */
+        .repositories {
+            margin: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            z-index: 10;
-        }
-        .indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .indicator.active {
-            background: #ff6b9d;
-            width: 30px;
-            border-radius: 6px;
-            box-shadow: 0 0 10px #ff6b9d;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
         }
 
-        /* 响应式适配（手机/电脑通用） */
+        .repo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .repo-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .repo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary-color), transparent);
+            opacity: 0.1;
+            transition: transform 0.3s ease;
+        }
+
+        .repo-card:hover::before {
+            transform: scale(2);
+        }
+
+        .repo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .repo-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .repo-name i {
+            font-size: 1.2rem;
+        }
+
+        .repo-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .repo-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .repo-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .language-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-color);
+        }
+
+        /* Contributions Graph */
+        .contributions {
+            margin: 80px 0;
+            text-align: center;
+        }
+
+        .contribution-graph {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            display: inline-block;
+            margin: 0 auto;
+        }
+
+        .graph-grid {
+            display: grid;
+            grid-template-columns: repeat(52, 15px);
+            gap: 5px;
+            grid-template-rows: repeat(7, 15px);
+        }
+
+        .graph-cell {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+            background: var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .graph-cell:hover {
+            transform: scale(1.5);
+        }
+
+        .graph-cell.level-1 { background: rgba(59, 130, 246, 0.3); }
+        .graph-cell.level-2 { background: rgba(59, 130, 246, 0.5); }
+        .graph-cell.level-3 { background: rgba(59, 130, 246, 0.7); }
+        .graph-cell.level-4 { background: rgba(59, 130, 246, 0.9); }
+
+        /* Skills */
+        .skills {
+            margin: 80px 0;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-item {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .skill-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .neon-title { font-size: 1.8rem; }
-            .carousel-item { height: 300px; }
-            .carousel-btn { width: 35px; height: 35px; font-size: 1rem; }
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .avatar {
+                width: 150px;
+                height: 150px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .repo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .graph-grid {
+                grid-template-columns: repeat(52, 10px);
+                gap: 3px;
+                grid-template-rows: repeat(7, 10px);
+            }
+
+            .graph-cell {
+                width: 10px;
+                height: 10px;
+            }
+
+            .contribution-graph {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .title {
+                font-size: 1.1rem;
+            }
+
+            .social-links {
+                gap: 15px;
+            }
+
+            .social-links a {
+                width: 45px;
+                height: 45px;
+                font-size: 1.25rem;
+            }
+
+            .stat-card {
+                padding: 20px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <!-- 霓虹标题 -->
-    <h1 class="neon-title">石原里美 图片展示</h1>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-bg"></div>
+            <img src="https://avatars.githubusercontent.com/u/your-user-id" alt="Avatar" class="avatar">
+            <h1>开发者名称</h1>
+            <p class="title">全栈开发者 | 开源贡献者 | 技术爱好者</p>
+            <div class="social-links">
+                <a href="https://github.com/your-username" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://twitter.com/your-username" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/in/your-username" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://dev.to/your-username" target="_blank" title="Dev.to"><i class="fab fa-dev"></i></a>
+                <a href="https://blog.your-website.com" target="_blank" title="Blog"><i class="fas fa-blog"></i></a>
+            </div>
+        </header>
 
-    <!-- 轮播容器 -->
-    <div class="carousel-container">
-        <div class="carousel" id="carousel">
-            <!-- 图片1 -->
-            <div class="carousel-item">
-                <img src="https://picsum.photos/id/1027/1200/500" alt="石原里美-写真" class="carousel-img">
-                <div class="img-caption">清新写真风格</div>
+        <!-- Stats -->
+        <section class="stats">
+            <div class="stat-card fade-in">
+                <span class="stat-number">100+</span>
+                <span class="stat-label">仓库</span>
             </div>
-            <!-- 图片2 -->
-            <div class="carousel-item">
-                <img src="https://picsum.photos/id/1025/1200/500" alt="石原里美-日常" class="carousel-img">
-                <div class="img-caption">日常穿搭记录</div>
+            <div class="stat-card fade-in">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">贡献</span>
             </div>
-            <!-- 图片3 -->
-            <div class="carousel-item">
-                <img src="https://picsum.photos/id/1011/1200/500" alt="石原里美-杂志" class="carousel-img">
-                <div class="img-caption">杂志封面拍摄</div>
+            <div class="stat-card fade-in">
+                <span class="stat-number">10k+</span>
+                <span class="stat-label">星标</span>
             </div>
-            <!-- 图片4 -->
-            <div class="carousel-item">
-                <img src="https://picsum.photos/id/1005/1200/500" alt="石原里美-活动" class="carousel-img">
-                <div class="img-caption">活动现场造型</div>
+            <div class="stat-card fade-in">
+                <span class="stat-number">100+</span>
+                <span class="stat-label">关注者</span>
             </div>
-            <!-- 图片5 -->
-            <div class="carousel-item">
-                <img src="https://picsum.photos/id/1003/1200/500" alt="石原里美-街拍" class="carousel-img">
-                <div class="img-caption">街头随拍瞬间</div>
-            </div>
-            <!-- 图片6 -->
-            <div class="carousel-item">
-                <img src="https://picsum.photos/id/1015/1200/500" alt="石原里美-复古" class="carousel-img">
-                <div class="img-caption">复古风写真</div>
-            </div>
-            <!-- 图片7 -->
-            <div class="carousel-item">
-                <img src="https://picsum.photos/id/1018/1200/500" alt="石原里美-职场" class="carousel-img">
-                <div class="img-caption">职场剧造型</div>
-            </div>
-            <!-- 图片8 -->
-            <div class="carousel-item">
-                <img src="https://picsum.photos/id/1019/1200/500" alt="石原里美-休闲" class="carousel-img">
-                <div class="img-caption">休闲度假风格</div>
-            </div>
-            <!-- 图片9 -->
-            <div class="carousel-item">
-                <img src="https://picsum.photos/id/1023/1200/500" alt="石原里美-正装" class="carousel-img">
-                <div class="img-caption">正装出席活动</div>
-            </div>
-            <!-- 图片10 -->
-            <div class="carousel-item">
-                <img src="https://picsum.photos/id/1024/1200/500" alt="石原里美-清新" class="carousel-img">
-                <div class="img-caption">夏日清新写真</div>
-            </div>
-        </div>
+        </section>
 
-        <!-- 控制按钮 -->
-        <button class="carousel-btn prev-btn" id="prevBtn">←</button>
-        <button class="carousel-btn next-btn" id="nextBtn">→</button>
+        <!-- Contributions Graph -->
+        <section class="contributions fade-in">
+            <h2 class="section-title">贡献图表</h2>
+            <div class="contribution-graph">
+                <div class="graph-grid">
+                    <!-- 生成贡献图表单元格 -->
+                    <script>
+                        for (let i = 0; i < 364; i++) {
+                            const level = Math.floor(Math.random() * 5);
+                            const cell = document.createElement('div');
+                            cell.className = `graph-cell level-${level}`;
+                            cell.title = `${Math.floor(Math.random() * 10)} contributions`;
+                            document.querySelector('.graph-grid').appendChild(cell);
+                        }
+                    </script>
+                </div>
+            </div>
+        </section>
 
-        <!-- 指示器 -->
-        <div class="indicators" id="indicators">
-            <div class="indicator active"></div>
-            <div class="indicator"></div>
-            <div class="indicator"></div>
-            <div class="indicator"></div>
-            <div class="indicator"></div>
-            <div class="indicator"></div>
-            <div class="indicator"></div>
-            <div class="indicator"></div>
-            <div class="indicator"></div>
-            <div class="indicator"></div>
-        </div>
+        <!-- Repositories -->
+        <section class="repositories fade-in">
+            <h2 class="section-title">精选仓库</h2>
+            <div class="repo-grid">
+                <div class="repo-card">
+                    <h3 class="repo-name"><i class="fab fa-react"></i> awesome-project</h3>
+                    <p class="repo-description">一个基于React的现代化Web应用，提供了丰富的功能和优雅的用户界面。</p>
+                    <div class="repo-meta">
+                        <span><div class="language-dot" style="background: #61DAFB;"></div> React</span>
+                        <span><i class="fas fa-star"></i> 120</span>
+                        <span><i class="fas fa-code-branch"></i> 25</span>
+                        <span><i class="far fa-calendar"></i> 2天前更新</span>
+                    </div>
+                </div>
+                <div class="repo-card">
+                    <h3 class="repo-name"><i class="fab fa-node-js"></i> node-api</h3>
+                    <p class="repo-description">高性能的Node.js API框架，支持RESTful和GraphQL接口。</p>
+                    <div class="repo-meta">
+                        <span><div class="language-dot" style="background: #339933;"></div> JavaScript</span>
+                        <span><i class="fas fa-star"></i> 85</span>
+                        <span><i class="fas fa-code-branch"></i> 18</span>
+                        <span><i class="far fa-calendar"></i> 5天前更新</span>
+                    </div>
+                </div>
+                <div class="repo-card">
+                    <h3 class="repo-name"><i class="fab fa-python"></i> data-science-tools</h3>
+                    <p class="repo-description">数据科学和机器学习工具集合，包含各种实用的算法和模型。</p>
+                    <div class="repo-meta">
+                        <span><div class="language-dot" style="background: #3776AB;"></div> Python</span>
+                        <span><i class="fas fa-star"></i> 200</span>
+                        <span><i class="fas fa-code-branch"></i> 40</span>
+                        <span><i class="far fa-calendar"></i> 1周前更新</span>
+                    </div>
+                </div>
+                <div class="repo-card">
+                    <h3 class="repo-name"><i class="fab fa-vuejs"></i> vue-components</h3>
+                    <p class="repo-description">Vue.js组件库，提供了丰富的UI组件和工具函数。</p>
+                    <div class="repo-meta">
+                        <span><div class="language-dot" style="background: #4FC08D;"></div> Vue</span>
+                        <span><i class="fas fa-star"></i> 150</span>
+                        <span><i class="fas fa-code-branch"></i> 32</span>
+                        <span><i class="far fa-calendar"></i> 3天前更新</span>
+                    </div>
+                </div>
+                <div class="repo-card">
+                    <h3 class="repo-name"><i class="fas fa-database"></i> database-utils</h3>
+                    <p class="repo-description">数据库工具包，支持多种数据库的连接和操作。</p>
+                    <div class="repo-meta">
+                        <span><div class="language-dot" style="background: #007ACC;"></div> TypeScript</span>
+                        <span><i class="fas fa-star"></i> 95</span>
+                        <span><i class="fas fa-code-branch"></i> 15</span>
+                        <span><i class="far fa-calendar"></i> 1周前更新</span>
+                    </div>
+                </div>
+                <div class="repo-card">
+                    <h3 class="repo-name"><i class="fab fa-android"></i> android-app</h3>
+                    <p class="repo-description">Android移动应用开发项目，使用Kotlin语言编写。</p>
+                    <div class="repo-meta">
+                        <span><div class="language-dot" style="background: #7F52FF;"></div> Kotlin</span>
+                        <span><i class="fas fa-star"></i> 110</span>
+                        <span><i class="fas fa-code-branch"></i> 22</span>
+                        <span><i class="far fa-calendar"></i> 2周前更新</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section class="skills fade-in">
+            <h2 class="section-title">技术栈</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                    <div class="skill-name">HTML5</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                    <div class="skill-name">CSS3</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-js"></i></div>
+                    <div class="skill-name">JavaScript</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-react"></i></div>
+                    <div class="skill-name">React</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-node-js"></i></div>
+                    <div class="skill-name">Node.js</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-python"></i></div>
+                    <div class="skill-name">Python</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-docker"></i></div>
+                    <div class="skill-name">Docker</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fas fa-database"></i></div>
+                    <div class="skill-name">Database</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="fade-in">
+            <div class="footer-content">
+                <p>感谢访问我的GitHub主页！</p>
+                <div class="footer-links">
+                    <a href="https://github.com/your-username">GitHub</a>
+                    <a href="https://twitter.com/your-username">Twitter</a>
+                    <a href="https://linkedin.com/in/your-username">LinkedIn</a>
+                    <a href="mailto:your-email@example.com">Email</a>
+                </div>
+                <p style="margin-top: 30px; font-size: 0.9rem;">&copy; 2024 开发者名称. All rights reserved.</p>
+            </div>
+        </footer>
     </div>
 
     <script>
-        // 轮播逻辑
-        const carousel = document.getElementById('carousel');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const indicators = document.getElementById('indicators').children;
-        const items = carousel.children;
-        let currentIndex = 0;
-        const itemCount = items.length;
-        const autoplayInterval = 3000; // 自动轮播间隔（3秒）
-        let autoplayTimer;
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-        // 更新轮播位置
-        function updateCarousel() {
-            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
-            // 更新指示器
-            Array.from(indicators).forEach((ind, idx) => {
-                ind.classList.toggle('active', idx === currentIndex);
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
             });
-        }
+        }, observerOptions);
 
-        // 下一张
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % itemCount;
-            updateCarousel();
-        }
-
-        // 上一张
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + itemCount) % itemCount;
-            updateCarousel();
-        }
-
-        // 指示器点击
-        Array.from(indicators).forEach((ind, idx) => {
-            ind.addEventListener('click', () => {
-                currentIndex = idx;
-                updateCarousel();
-                restartAutoplay(); // 点击后重启自动轮播
-            });
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
         });
 
-        // 自动轮播
-        function startAutoplay() {
-            autoplayTimer = setInterval(nextSlide, autoplayInterval);
+        // GitHub API 集成（可选）
+        // 取消注释以下代码以获取真实的GitHub数据
+        /*
+        const username = 'your-username';
+        
+        // 获取用户信息
+        fetch(`https://api.github.com/users/${username}`)
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector('.avatar').src = data.avatar_url;
+                document.querySelector('h1').textContent = data.name || data.login;
+                document.querySelector('.title').textContent = data.bio || '';
+            })
+            .catch(error => console.error('Error fetching user data:', error));
+        
+        // 获取仓库信息
+        fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`)
+            .then(response => response.json())
+            .then(repos => {
+                const repoGrid = document.querySelector('.repo-grid');
+                repoGrid.innerHTML = '';
+                
+                repos.forEach(repo => {
+                    const repoCard = document.createElement('div');
+                    repoCard.className = 'repo-card';
+                    repoCard.innerHTML = `
+                        <h3 class="repo-name"><i class="fab fa-${repo.language ? getLanguageIcon(repo.language) : 'code'}"></i> ${repo.name}</h3>
+                        <p class="repo-description">${repo.description || 'No description'}</p>
+                        <div class="repo-meta">
+                            <span><div class="language-dot" style="background: ${getLanguageColor(repo.language)}"></div> ${repo.language || 'Unknown'}</span>
+                            <span><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
+                            <span><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>
+                            <span><i class="far fa-calendar"></i> ${formatDate(repo.updated_at)}</span>
+                        </div>
+                    `;
+                    repoGrid.appendChild(repoCard);
+                });
+            })
+            .catch(error => console.error('Error fetching repos:', error));
+        
+        function getLanguageIcon(language) {
+            const icons = {
+                'JavaScript': 'js',
+                'TypeScript': 'js',
+                'Python': 'python',
+                'Java': 'java',
+                'C++': 'cplusplus',
+                'C#': 'csharp',
+                'PHP': 'php',
+                'Ruby': 'ruby',
+                'Go': 'golang',
+                'Rust': 'rust',
+                'Swift': 'swift',
+                'Kotlin': 'kotlin',
+                'HTML': 'html5',
+                'CSS': 'css3-alt',
+                'React': 'react',
+                'Vue': 'vuejs',
+                'Angular': 'angular',
+                'Node.js': 'node-js',
+                'Docker': 'docker'
+            };
+            return icons[language] || 'code';
         }
-
-        // 重启自动轮播
-        function restartAutoplay() {
-            clearInterval(autoplayTimer);
-            startAutoplay();
+        
+        function getLanguageColor(language) {
+            const colors = {
+                'JavaScript': '#F7DF1E',
+                'TypeScript': '#3178C6',
+                'Python': '#3776AB',
+                'Java': '#007396',
+                'C++': '#00599C',
+                'C#': '#239120',
+                'PHP': '#777BB4',
+                'Ruby': '#CC342D',
+                'Go': '#00ADD8',
+                'Rust': '#DEA584',
+                'Swift': '#FA7343',
+                'Kotlin': '#7F52FF',
+                'HTML': '#E34F26',
+                'CSS': '#1572B6',
+                'React': '#61DAFB',
+                'Vue': '#4FC08D',
+                'Angular': '#DD0031'
+            };
+            return colors[language] || '#94A3B8';
         }
-
-        // 按钮事件
-        prevBtn.addEventListener('click', () => {
-            prevSlide();
-            restartAutoplay();
-        });
-        nextBtn.addEventListener('click', () => {
-            nextSlide();
-            restartAutoplay();
-        });
-
-        // 鼠标悬停暂停自动轮播
-        carousel-container.addEventListener('mouseenter', () => {
-            clearInterval(autoplayTimer);
-        });
-        carousel-container.addEventListener('mouseleave', startAutoplay);
-
-        // 初始化
-        startAutoplay();
+        
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 0) return '今天更新';
+            if (diffDays === 1) return '昨天更新';
+            if (diffDays < 7) return `${diffDays}天前更新`;
+            if (diffDays < 30) return `${Math.floor(diffDays / 7)}周前更新`;
+            if (diffDays < 365) return `${Math.floor(diffDays / 30)}个月前更新`;
+            return `${Math.floor(diffDays / 365)}年前更新`;
+        }
+        */
     </script>
 </body>
 </html>
