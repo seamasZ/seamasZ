@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人简历</title>
+    <title>技术栈知识树</title>
     <style>
         * {
             margin: 0;
@@ -12,911 +12,311 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
-            overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            color: #333;
+            padding: 20px;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 60px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            overflow: hidden;
         }
 
         h1 {
-            font-size: 3rem;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            margin-bottom: 10px;
-            animation: bounceInDown 1s ease-out;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            animation: bounceInUp 1s ease-out 0.3s both;
-        }
-
-        /* 简历容器 */
-        .resume-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            animation: fadeIn 1s ease-out 0.5s both;
-        }
-
-        /* 个人信息卡片 */
-        .personal-info-card {
-            background: #fff;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            animation: bounceInUp 0.8s ease-out 0.7s both;
-        }
-
-        .personal-info-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-        }
-
-        .personal-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            gap: 30px;
-        }
-
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #fff;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .name-section h2 {
-            font-size: 2rem;
+            text-align: center;
             color: #333;
-            margin-bottom: 5px;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
-        .name-section p {
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #555;
-        }
-
-        /* 简历卡片通用样式 */
-        .resume-card {
-            background: #fff;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .resume-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-        }
-
-        .resume-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            color: #333;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-title::before {
-            content: '';
-            width: 8px;
-            height: 24px;
-            background: linear-gradient(180deg, #ff9a9e, #fad0c4);
-            border-radius: 4px;
-        }
-
-        /* 教育背景 */
-        .education-item {
-            margin-bottom: 25px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .education-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .education-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .education-institution {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .education-period {
-            color: #ff9a9e;
-            font-weight: bold;
-        }
-
-        .education-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 10px;
-        }
-
-        .education-major {
-            color: #555;
-            font-weight: 500;
-        }
-
-        .education-degree {
-            color: #555;
-            font-weight: 500;
-        }
-
-        .education-gpa {
-            color: #555;
-        }
-
-        /* 个人特点 */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .feature-item {
-            background: #f9f9f9;
-            border-radius: 10px;
-            padding: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .feature-item:hover {
-            transform: translateY(-5px);
-            background: #f5f5f5;
-        }
-
-        .feature-item h4 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-
-        .feature-item ul {
-            list-style-type: disc;
-            padding-left: 20px;
-            color: #555;
-        }
-
-        .feature-item li {
-            margin-bottom: 8px;
-        }
-
-        /* 技能 */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .skill-category h4 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-
-        .skill-item {
-            margin-bottom: 12px;
-        }
-
-        .skill-name {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-            color: #555;
-        }
-
-        .skill-bar {
-            width: 100%;
-            height: 8px;
-            background: #f0f0f0;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .skill-progress {
-            height: 100%;
-            background: linear-gradient(90deg, #ff9a9e, #fad0c4);
-            border-radius: 4px;
-            transition: width 1s ease-out;
-        }
-
-        /* 项目经历 */
-        .project-item {
-            margin-bottom: 30px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .project-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .project-info h4 {
-            font-size: 1.2rem;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .project-info p {
-            color: #666;
-        }
-
-        .project-period {
-            color: #ff9a9e;
-            font-weight: bold;
-        }
-
-        .project-description ul {
-            list-style-type: disc;
-            padding-left: 20px;
-            color: #555;
-            margin-top: 10px;
-        }
-
-        .project-description li {
-            margin-bottom: 8px;
-        }
-
-        /* 荣誉 */
-        .honors-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .honor-item {
-            background: #f9f9f9;
-            border-radius: 10px;
-            padding: 20px;
-            transition: all 0.3s ease;
-            border-left: 4px solid #ff9a9e;
-        }
-
-        .honor-item:hover {
-            transform: translateX(10px);
-            background: #f5f5f5;
-        }
-
-        .honor-item h4 {
-            color: #333;
-            margin-bottom: 8px;
-        }
-
-        .honor-item p {
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        /* 动画 */
-        @keyframes bounceInDown {
-            0% {
-                opacity: 0;
-                transform: translateY(-2000px);
-            }
-            60% {
-                opacity: 1;
-                transform: translateY(30px);
-            }
-            80% {
-                transform: translateY(-10px);
-            }
-            100% {
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes bounceInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(2000px);
-            }
-            60% {
-                opacity: 1;
-                transform: translateY(-30px);
-            }
-            80% {
-                transform: translateY(10px);
-            }
-            100% {
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-30px) rotate(180deg);
-            }
-        }
-
-        /* 加载动画 */
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        .mindmap {
             display: flex;
             justify-content: center;
+            align-items: flex-start;
+            gap: 100px;
+            padding: 40px 0;
+            min-height: 800px;
+            position: relative;
+        }
+
+        .tree-container {
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
+            position: relative;
         }
 
-        .loader.fade-out {
-            opacity: 0;
-            pointer-events: none;
+        .root-node {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 15px;
+            font-size: 1.5em;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
         }
 
-        .loader-content {
-            text-align: center;
-            color: #fff;
+        .root-node:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
         }
 
-        .loader-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid #fff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+        .children-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 50px;
+            position: relative;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .child-node {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: 600;
+            box-shadow: 0 6px 15px rgba(240, 147, 251, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        /* 背景装饰 */
-        .background-decoration {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
+        .child-node:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(240, 147, 251, 0.6);
         }
 
-        .decoration-circle {
+        .grandchildren-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 40px;
+            position: relative;
+        }
+
+        .grandchild-node {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(79, 172, 254, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .grandchild-node:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(79, 172, 254, 0.6);
+        }
+
+        .connector {
             position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            animation: float 6s ease-in-out infinite;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 3px;
+            border-radius: 2px;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
         }
 
-        .decoration-circle:nth-child(1) {
-            width: 100px;
-            height: 100px;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
+        .connector-vertical {
+            position: absolute;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            width: 3px;
+            border-radius: 2px;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
         }
 
-        .decoration-circle:nth-child(2) {
-            width: 150px;
-            height: 150px;
-            top: 20%;
-            right: 15%;
-            animation-delay: 2s;
+        .tree-left {
+            align-items: flex-end;
         }
 
-        .decoration-circle:nth-child(3) {
-            width: 80px;
-            height: 80px;
-            bottom: 20%;
-            left: 20%;
-            animation-delay: 4s;
+        .tree-left .children-container {
+            align-items: flex-end;
         }
 
-        .decoration-circle:nth-child(4) {
-            width: 120px;
-            height: 120px;
-            bottom: 10%;
-            right: 10%;
-            animation-delay: 6s;
+        .tree-left .grandchildren-container {
+            align-items: flex-end;
         }
 
-        /* 响应式设计 */
+        .tree-right {
+            align-items: flex-start;
+        }
+
+        .tree-right .children-container {
+            align-items: flex-start;
+        }
+
+        .tree-right .grandchildren-container {
+            align-items: flex-start;
+        }
+
+        @media (max-width: 1200px) {
+            .mindmap {
+                flex-direction: column;
+                align-items: center;
+                gap: 80px;
+            }
+
+            .tree-left, .tree-right {
+                align-items: center;
+            }
+
+            .tree-left .children-container,
+            .tree-right .children-container {
+                align-items: center;
+            }
+
+            .tree-left .grandchildren-container,
+            .tree-right .grandchildren-container {
+                align-items: center;
+            }
+        }
+
         @media (max-width: 768px) {
-            .personal-header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .contact-info {
-                grid-template-columns: 1fr;
-            }
-
-            .education-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .project-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
-
-            .skills-container {
-                grid-template-columns: 1fr;
-            }
-
-            .honors-list {
-                grid-template-columns: 1fr;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .name-section h2 {
-                font-size: 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
             .container {
-                padding: 20px 15px;
-            }
-
-            .personal-info-card,
-            .resume-card {
                 padding: 20px;
             }
 
             h1 {
-                font-size: 1.8rem;
+                font-size: 1.8em;
             }
 
-            .section-title {
-                font-size: 1.3rem;
+            .root-node {
+                padding: 15px 30px;
+                font-size: 1.2em;
             }
 
-            .education-institution,
-            .project-info h4 {
-                font-size: 1.1rem;
+            .child-node {
+                padding: 12px 25px;
+                font-size: 1em;
             }
+
+            .grandchild-node {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+
+        .skill-list {
+            list-style: none;
+            margin-top: 10px;
+            padding: 0;
+        }
+
+        .skill-list li {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-right: 5px;
         }
     </style>
 </head>
 <body>
-    <!-- 加载动画 -->
-    <div class="loader" id="loader">
-        <div class="loader-content">
-            <div class="loader-spinner"></div>
-            <h2>正在加载简历...</h2>
+    <div class="container">
+        <h1>技术栈知识树</h1>
+        <div class="mindmap">
+            <div class="tree-container tree-left">
+                <div class="root-node">移动端开发</div>
+                <div class="children-container">
+                    <div class="child-node">
+                        安卓应用开发
+                        <ul class="skill-list">
+                            <li>Kotlin</li>
+                            <li>Java</li>
+                            <li>Jetpack Compose</li>
+                            <li>Room</li>
+                            <li>Retrofit</li>
+                            <li>Coroutines</li>
+                            <li>ViewModel</li>
+                            <li>DataBinding</li>
+                        </ul>
+                    </div>
+                    <div class="child-node">
+                        安卓Framework
+                        <ul class="skill-list">
+                            <li>AMS</li>
+                            <li>PMS</li>
+                            <li>WMS</li>
+                            <li>Binder IPC</li>
+                            <li>Zygote</li>
+                            <li>SystemServer</li>
+                            <li>PackageManager</li>
+                            <li>WindowManager</li>
+                        </ul>
+                    </div>
+                    <div class="child-node">
+                        跨平台开发
+                        <ul class="skill-list">
+                            <li>Flutter</li>
+                            <li>React Native</li>
+                            <li>Weex</li>
+                            <li>H5混合开发</li>
+                            <li>小程序开发</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tree-container tree-right">
+                <div class="root-node">后端开发</div>
+                <div class="children-container">
+                    <div class="child-node">
+                        Java后端
+                        <ul class="skill-list">
+                            <li>Spring Boot</li>
+                            <li>Spring Cloud</li>
+                            <li>MyBatis</li>
+                            <li>JPA/Hibernate</li>
+                            <li>Netty</li>
+                            <li>Dubbo</li>
+                            <li>Redis</li>
+                            <li>MySQL</li>
+                        </ul>
+                    </div>
+                    <div class="child-node">
+                        微服务架构
+                        <ul class="skill-list">
+                            <li>服务注册发现</li>
+                            <li>配置中心</li>
+                            <li>API网关</li>
+                            <li>熔断降级</li>
+                            <li>分布式事务</li>
+                            <li>消息队列</li>
+                            <li>链路追踪</li>
+                        </ul>
+                    </div>
+                    <div class="child-node">
+                        中间件
+                        <ul class="skill-list">
+                            <li>Kafka</li>
+                            <li>RabbitMQ</li>
+                            <li>Elasticsearch</li>
+                            <li>Nginx</li>
+                            <li>Docker</li>
+                            <li>Kubernetes</li>
+                            <li>Jenkins</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <!-- 背景装饰 -->
-    <div class="background-decoration">
-        <div class="decoration-circle"></div>
-        <div class="decoration-circle"></div>
-        <div class="decoration-circle"></div>
-        <div class="decoration-circle"></div>
-    </div>
-
-    <div class="container">
-        <header class="header">
-            <h1>个人简历</h1>
-            <p class="subtitle">赵士贤 - Android开发工程师</p>
-        </header>
-
-        <main class="resume-container" id="resume">
-            <!-- 个人信息卡片 -->
-            <div class="personal-info-card">
-                <div class="personal-header">
-                    <img src="https://via.placeholder.com/120x120?text=赵士贤" alt="赵士贤" class="avatar">
-                    <div class="name-section">
-                        <h2>赵士贤</h2>
-                        <p>1997年3月 | 河北省唐山市 | 中共党员</p>
-                    </div>
-                </div>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <span>📞</span>
-                        <span>13515835130</span>
-                    </div>
-                    <div class="contact-item">
-                        <span>✉️</span>
-                        <span>seamazhao@126.com</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 教育背景 -->
-            <div class="resume-card">
-                <h3 class="section-title">教育背景</h3>
-                <div class="education-item">
-                    <div class="education-header">
-                        <div class="education-institution">中国科学院大学</div>
-                        <div class="education-period">2020.09 - 2023.06</div>
-                    </div>
-                    <div class="education-details">
-                        <div class="education-major">电子信息</div>
-                        <div class="education-degree">硕士</div>
-                        <div class="education-gpa">GPA: 3.69/4.0</div>
-                    </div>
-                </div>
-                <div class="education-item">
-                    <div class="education-header">
-                        <div class="education-institution">燕山大学</div>
-                        <div class="education-period">2016.09 - 2020.07</div>
-                    </div>
-                    <div class="education-details">
-                        <div class="education-major">电子信息科学与技术</div>
-                        <div class="education-degree">本科 | 保研研究生</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 个人特点 -->
-            <div class="resume-card">
-                <h3 class="section-title">个人特点</h3>
-                <div class="features">
-                    <div class="feature-item">
-                        <h4>经历</h4>
-                        <ul>
-                            <li>参与过百万级车载APP的开发维护</li>
-                            <li>有独立承担项目的经验</li>
-                        </ul>
-                    </div>
-                    <div class="feature-item">
-                        <h4>技术</h4>
-                        <ul>
-                            <li>端流驱动架构，熟悉Android开发框架</li>
-                            <li>与其它技术栈对接（如服务端、算法部署等）</li>
-                        </ul>
-                    </div>
-                    <div class="feature-item">
-                        <h4>业务</h4>
-                        <ul>
-                            <li>熟悉智能座舱、音频娱乐、智慧场景等业务</li>
-                            <li>熟悉与政府与海内外供应商沟通技巧</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 技能 -->
-            <div class="resume-card">
-                <h3 class="section-title">技能</h3>
-                <div class="skills-container">
-                    <div class="skill-category">
-                        <h4>Java技术能力</h4>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>多线程、集合、反射</span>
-                                <span>90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>设计模式</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h4>Android开发</h4>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>MVC、MVP、MVVM架构</span>
-                                <span>95%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>Activity、Fragment生命周期</span>
-                                <span>90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>UI绘制和自定义View</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>Data Binding、LiveData</span>
-                                <span>90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h4>工具与框架</h4>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>APM框架（ARouter、Glide）</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>Profiler、MAT</span>
-                                <span>80%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>Git、Jenkins、Gradle</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 项目经历 -->
-            <div class="resume-card">
-                <h3 class="section-title">项目经历</h3>
-                <div class="project-item">
-                    <div class="project-header">
-                        <div class="project-info">
-                            <h4>比亚迪 - 海格独立音乐（西安）</h4>
-                            <p>Android应用开发 | 项目owner</p>
-                        </div>
-                        <div class="project-period">2024.09 - 至今</div>
-                    </div>
-                    <div class="project-description">
-                        <ul>
-                            <li>主导2个海外音乐应用(Amazon Music、FLO)在全球品牌车端的开发上线</li>
-                            <li>负责设计技术框架、框架搭建(MVVM+Anko)、渠道管理，与同事分工及进度把控</li>
-                            <li>智能语音对接：基于ADUI对接SDK提供音乐识别请求-响应，支持"可见可说"</li>
-                            <li>熟悉google的MediaSession框架、MediaPlayer、Audio focus通过分配preferVolume设计解决多模式下的兼容性问题</li>
-                            <li>屏幕适配：覆盖多部门，稳定运行于ROM下的横竖屏、分屏、深色浅</li>
-                            <li>完成TV应用的开发迭代，适配RTL语言与小屏幕，常用TV操作</li>
-                            <li>维护与优化：负责分支管理、Product流程、发布版本管理</li>
-                            <li>包体优化：internal模块、冷启动速度优化</li>
-                            <li>维护changlog、解决用户反馈的问题，修复安全漏洞</li>
-                            <li>海内外供应商技术支持：协助采购确认(Apple Music, Deezer)，输出评估文档</li>
-                            <li>推动应用落地：如集成供应商APK到车机系统，多拉多任务栏与Audio的配置</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="project-item">
-                    <div class="project-header">
-                        <div class="project-info">
-                            <h4>比亚迪 - 融合音乐（深圳）</h4>
-                            <p>Android开发工程师</p>
-                        </div>
-                        <div class="project-period">2023.07 - 2024.10</div>
-                    </div>
-                    <div class="project-description">
-                        <ul>
-                            <li>应用上线于比亚迪全球高端车型，基于MVVM架构，包括DataBinding等组件</li>
-                            <li>开发音乐服务：负责多个中部商全部点播核心功能设计与开发，包括账号登录、歌曲单曲收藏、多首音乐下载、处理播放队列和歌词同步功能</li>
-                            <li>参与写考拉向Fragment的替换为SDK</li>
-                            <li>参与与马蜂窝APP接入替换为SDK的重构</li>
-                            <li>参与对接规范的制定，View的云裁剪；参与定义BindingAdapter的开发</li>
-                            <li>SDK平台：参与自购Nexus等第三方与自研SDK封装，用于判断用户账号资产，暴露统一的API接口以词化多供应商协议差异</li>
-                            <li>对接运营：维护解决bug，均按时处理</li>
-                            <li>熟悉数据库同步解决在多平台、多架构、多系统性特性的兼容适配</li>
-                            <li>参与完成TV形态的布局开发、处理UI与数据，曾作为平台组件</li>
-                            <li>根据交互规范要求，参与完成原型优化与重构协作</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="project-item">
-                    <div class="project-header">
-                        <div class="project-info">
-                            <h4>中国科学院 - 监控视频分析系统（北京）</h4>
-                            <p>后端开发/模型部署</p>
-                        </div>
-                        <div class="project-period">2021.09 - 2023.06</div>
-                    </div>
-                    <div class="project-description">
-                        <ul>
-                            <li>项目内容：一个视频目标检测和行为进行分析系统，采集监控视频数据，计算机视觉算法批量处理</li>
-                            <li>系统前后端：我负责开发、摄像头接口、摄像头设计并开发数据入库</li>
-                            <li>系统后端：端机与相关算法服务与接口部署设计，设计并实现后端基于Restful API的通信机制，后端基于Spring框架完成数据处理、序列化传输与多模块任务调度</li>
-                            <li>模型部署：通过模型剪枝（移除冗余卷积核，减少30%参与数量）和INT8量化，在保证检测精度（mAP下降 ≤1.5%）的前提下缩减模型体积；使用TensorRT对Yolox检测模型进行推理加速并部署于Docker容器，结合Kafka实现并发数据流传输，后端支持单串处理13路视频流，系统每秒稳定处理图像1000余张</li>
-                            <li>数据处理：构建Redis缓存+MySQL持久化的数据方案，处理报警记录、摄像头设备状态与违规行为统计管理；支持摄像头动态增删、算法开关控制等配置接口，提升系统灵活性与扩展性</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 荣誉 -->
-            <div class="resume-card">
-                <h3 class="section-title">荣誉</h3>
-                <div class="honors-list">
-                    <div class="honor-item">
-                        <h4>比亚迪迪迦研发中心 - 高潜应届生</h4>
-                        <p>2024-2025年度</p>
-                    </div>
-                    <div class="honor-item">
-                        <h4>国家励志奖学金</h4>
-                        <p>2017-2019，连续两年</p>
-                    </div>
-                    <div class="honor-item">
-                        <h4>燕山大学优秀毕业生</h4>
-                        <p>2020年，Top 3%</p>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <script>
-        // 初始化页面
-        document.addEventListener('DOMContentLoaded', function() {
-            const resume = document.getElementById('resume');
-            const loader = document.getElementById('loader');
-
-            // 延迟显示加载动画
-            setTimeout(() => {
-                loader.classList.add('fade-out');
-            }, 1000);
-
-            // 添加滚动动画效果
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-
-            // 为所有简历卡片添加动画
-            document.querySelectorAll('.resume-card').forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                card.style.transition = `opacity 0.8s ease-out ${index * 0.1}s, transform 0.8s ease-out ${index * 0.1}s`;
-                observer.observe(card);
-            });
-
-            // 为技能进度条添加动画
-            const skillObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const skillBars = entry.target.querySelectorAll('.skill-progress');
-                        skillBars.forEach(bar => {
-                            const width = bar.style.width;
-                            bar.style.width = '0';
-                            setTimeout(() => {
-                                bar.style.width = width;
-                            }, 100);
-                        });
-                        skillObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            const skillsContainer = document.querySelector('.skills-container');
-            if (skillsContainer) {
-                skillObserver.observe(skillsContainer);
-            }
-        });
-    </script>
 </body>
 </html>
