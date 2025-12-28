@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>技术栈知识树</title>
+    <title>技术栈思维导图</title>
     <style>
         * {
             margin: 0;
@@ -13,1217 +13,652 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            overflow: hidden;
-            color: #fff;
+            padding: 20px;
+            overflow-x: auto;
         }
 
         .container {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
+            max-width: 2000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .mindmap-container {
             display: flex;
             justify-content: center;
-            align-items: center;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .mindmap-section {
+            flex: 1;
+            min-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .mindmap-section h2 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
         }
 
         .mindmap {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
-        .center-node {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 35px 45px;
-            border-radius: 25px;
-            font-size: 1.6rem;
-            font-weight: 700;
-            text-align: center;
-            min-width: 180px;
-            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.5);
-            z-index: 100;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .center-node:hover {
-            transform: translate(-50%, -50%) scale(1.1);
-            box-shadow: 0 30px 80px rgba(102, 126, 234, 0.7);
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+            padding: 20px 0;
         }
 
         .branch {
-            position: absolute;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .branch-node {
-            padding: 15px 25px;
-            border-radius: 18px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-align: center;
-            min-width: 140px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            z-index: 50;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-        .branch-node:hover {
-            transform: scale(1.08);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
-        }
-
-        .branch-node.android {
-            background: linear-gradient(135deg, #3DDC84 0%, #2A9D8F 100%);
-        }
-
-        .branch-node.fwk {
-            background: linear-gradient(135deg, #FF6B6B 0%, #EE5A24 100%);
-        }
-
-        .branch-node.java {
-            background: linear-gradient(135deg, #F39C12 0%, #E74C3C 100%);
-        }
-
-        .branch-node.ai {
-            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
-        }
-
-        .branch-node.common {
-            background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
-        }
-
-        .branch-node.project {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-        }
-
-        .sub-nodes {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 10px;
-            justify-content: center;
-            max-width: 300px;
-        }
-
-        .sub-node {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 6px 12px;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            white-space: nowrap;
+            align-items: flex-start;
+            gap: 40px;
             position: relative;
         }
 
-        .sub-node:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
-            border-color: rgba(255, 255, 255, 0.4);
-            z-index: 100;
+        .left-mindmap .branch {
+            flex-direction: row-reverse;
         }
 
-        .sub-node .detail {
-            display: none;
+        .right-mindmap .branch {
+            flex-direction: row;
+        }
+
+        .main-node {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            white-space: nowrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .left-mindmap .main-node::after {
+            content: '';
             position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.95);
-            padding: 15px;
+            left: -40px;
+            top: 50%;
+            width: 40px;
+            height: 3px;
+            background: #667eea;
+        }
+
+        .right-mindmap .main-node::before {
+            content: '';
+            position: absolute;
+            right: -40px;
+            top: 50%;
+            width: 40px;
+            height: 3px;
+            background: #667eea;
+        }
+
+        .sub-branches {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            position: relative;
+        }
+
+        .sub-branch {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            position: relative;
+        }
+
+        .left-mindmap .sub-branch {
+            flex-direction: row-reverse;
+        }
+
+        .right-mindmap .sub-branch {
+            flex-direction: row;
+        }
+
+        .sub-node {
+            background: white;
+            padding: 15px 25px;
             border-radius: 12px;
-            font-size: 0.7rem;
-            color: #fff;
-            min-width: 250px;
-            max-width: 350px;
-            z-index: 200;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            text-align: left;
-            margin-top: 8px;
-            white-space: normal;
-            line-height: 1.6;
-        }
-
-        .sub-node:hover .detail {
-            display: block;
-        }
-
-        .detail h4 {
-            color: #667eea;
-            margin-bottom: 8px;
-            font-size: 0.85rem;
+            font-size: 1.1rem;
             font-weight: 600;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .detail ul {
-            list-style: none;
-            padding: 0;
+        .sub-node:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
         }
 
-        .detail li {
-            padding: 3px 0;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.68rem;
-        }
-
-        .detail li::before {
-            content: "•";
-            color: #667eea;
-            margin-right: 6px;
-        }
-
-        .connector {
+        .left-mindmap .sub-node::after {
+            content: '';
             position: absolute;
-            pointer-events: none;
-            z-index: 1;
+            left: -30px;
+            top: 50%;
+            width: 30px;
+            height: 2px;
+            background: #999;
         }
 
-        .connector-line {
-            stroke: rgba(255, 255, 255, 0.25);
-            stroke-width: 2;
-            fill: none;
+        .right-mindmap .sub-node::before {
+            content: '';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            width: 30px;
+            height: 2px;
+            background: #999;
         }
 
-        @media (max-width: 1400px) {
-            .branch-node {
-                font-size: 1rem;
-                padding: 12px 20px;
-                min-width: 120px;
+        .detail-nodes {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            position: relative;
+        }
+
+        .detail-node {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .detail-node:hover {
+            background: white;
+            transform: translateX(5px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .left-mindmap .detail-node:hover {
+            transform: translateX(-5px);
+        }
+
+        .left-mindmap .detail-node::after {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            width: 20px;
+            height: 2px;
+            background: #ccc;
+        }
+
+        .right-mindmap .detail-node::before {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            width: 20px;
+            height: 2px;
+            background: #ccc;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .vertical-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #667eea;
+        }
+
+        .left-mindmap .vertical-line {
+            left: 0;
+        }
+
+        .right-mindmap .vertical-line {
+            right: 0;
+        }
+
+        @media (max-width: 1600px) {
+            .mindmap-container {
+                flex-direction: column;
+                align-items: center;
             }
 
-            .sub-nodes {
-                max-width: 260px;
-            }
-
-            .sub-node {
-                font-size: 0.7rem;
-                padding: 5px 10px;
+            .mindmap-section {
+                min-width: 100%;
+                max-width: 900px;
             }
         }
 
         @media (max-width: 768px) {
-            .container {
-                overflow-y: auto;
-                height: auto;
-                min-height: 100vh;
-                padding: 20px;
+            h1 {
+                font-size: 1.5rem;
             }
 
-            .mindmap {
-                position: relative;
-                height: auto;
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 25px;
+            .main-node {
+                font-size: 1rem;
+                padding: 15px 20px;
             }
 
-            .center-node {
-                position: relative;
-                top: auto;
-                left: auto;
-                transform: none;
-                margin: 20px 0;
-                font-size: 1.4rem;
+            .sub-node {
+                font-size: 0.9rem;
+                padding: 12px 18px;
             }
 
-            .branch {
-                position: relative;
-                top: auto;
-                left: auto;
-                right: auto;
-                bottom: auto;
-                transform: none;
-                width: 100%;
-                max-width: 380px;
+            .detail-node {
+                font-size: 0.85rem;
+                padding: 10px 15px;
             }
 
-            .connector {
-                display: none;
+            .skill-tag {
+                font-size: 0.7rem;
+                padding: 3px 8px;
             }
 
-            .sub-node .detail {
-                position: static;
-                transform: none;
-                margin-top: 5px;
-                min-width: 100%;
+            .branch, .sub-branch {
+                gap: 20px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="mindmap">
-            <svg class="connector" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                <defs>
-                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:0.3" />
-                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:0.3" />
-                    </linearGradient>
-                </defs>
-                <line class="connector-line" x1="50%" y1="50%" x2="50%" y2="12%" />
-                <line class="connector-line" x1="50%" y1="50%" x2="85%" y2="30%" />
-                <line class="connector-line" x1="50%" y1="50%" x2="85%" y2="70%" />
-                <line class="connector-line" x1="50%" y1="50%" x2="50%" y2="88%" />
-                <line class="connector-line" x1="50%" y1="50%" x2="15%" y2="70%" />
-                <line class="connector-line" x1="50%" y1="50%" x2="15%" y2="30%" />
-            </svg>
+        <h1>🧠 技术栈思维导图</h1>
 
-            <div class="center-node">软件开发</div>
+        <div class="mindmap-container">
+            <div class="mindmap-section">
+                <h2>💻 软件开发</h2>
+                <div class="mindmap left-mindmap">
+                    <div class="vertical-line"></div>
 
-            <div class="branch" style="top: 5%; left: 50%; transform: translateX(-50%);">
-                <div class="branch-node android">Android应用开发</div>
-                <div class="sub-nodes">
-                    <div class="sub-node">Kotlin/Java
-                        <div class="detail">
-                            <h4>Kotlin/Java</h4>
-                            <ul>
-                                <li>协程（Coroutines）- 异步编程</li>
-                                <li>Flow - 响应式数据流</li>
-                                <li>DSL - 领域特定语言</li>
-                                <li>扩展函数 - 增强功能</li>
-                                <li>高阶函数 - 函数式编程</li>
-                                <li>密封类 - 类型安全</li>
-                                <li>空安全 - 避免NPE</li>
-                                <li>智能转换 - 自动类型推断</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">Jetpack
-                        <div class="detail">
-                            <h4>Jetpack组件</h4>
-                            <ul>
-                                <li>ViewModel - 管理UI数据</li>
-                                <li>LiveData - 响应式数据</li>
-                                <li>Room - 数据库ORM</li>
-                                <li>WorkManager - 后台任务</li>
-                                <li>DataStore - 数据存储</li>
-                                <li>Navigation - 导航组件</li>
-                                <li>Paging - 分页加载</li>
-                                <li>CameraX - 相机库</li>
-                                <li>Hilt - 依赖注入</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">网络框架
-                        <div class="detail">
-                            <h4>网络框架</h4>
-                            <ul>
-                                <li>Retrofit2 - RESTful API</li>
-                                <li>OkHttp3 - HTTP客户端</li>
-                                <li>Gson - JSON解析</li>
-                                <li>拦截器 - 请求拦截</li>
-                                <li>缓存策略 - 离线支持</li>
-                                <li>WebSocket - 实时通信</li>
-                                <li>连接池 - 性能优化</li>
-                                <li>HTTPS - 安全传输</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">异步处理
-                        <div class="detail">
-                            <h4>异步处理</h4>
-                            <ul>
-                                <li>RxJava2 - 响应式编程</li>
-                                <li>Observable - 数据流</li>
-                                <li>Flowable - 背压处理</li>
-                                <li>Single - 单值响应</li>
-                                <li>Completable - 无返回值</li>
-                                <li>Maybe - 可选值</li>
-                                <li>操作符 - 数据转换</li>
-                                <li>线程切换 - 线程调度</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">依赖注入
-                        <div class="detail">
-                            <h4>依赖注入</h4>
-                            <ul>
-                                <li>Dagger2 - 编译时DI</li>
-                                <li>@Inject - 依赖注入</li>
-                                <li>@Module - 模块定义</li>
-                                <li>@Component - 组件接口</li>
-                                <li>@Provides - 提供依赖</li>
-                                <li>@Scope - 作用域</li>
-                                <li>@Singleton - 单例模式</li>
-                                <li>Hilt - 简化Dagger</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">UI开发
-                        <div class="detail">
-                            <h4>UI开发</h4>
-                            <ul>
-                                <li>View系统 - 传统UI</li>
-                                <li>Compose - 声明式UI</li>
-                                <li>自定义View - 定制组件</li>
-                                <li>属性动画 - 动画效果</li>
-                                <li>帧动画 - 序列帧</li>
-                                <li>Material Design - 设计规范</li>
-                                <li>ConstraintLayout - 约束布局</li>
-                                <li>RecyclerView - 列表展示</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">图片加载
-                        <div class="detail">
-                            <h4>图片加载</h4>
-                            <ul>
-                                <li>Glide - 图片加载</li>
-                                <li>Picasso - 简易加载</li>
-                                <li>Fresco - 高性能加载</li>
-                                <li>图片缓存 - 内存/磁盘</li>
-                                <li>GIF加载 - 动图支持</li>
-                                <li>图片压缩 - 优化大小</li>
-                                <li>圆角处理 - 图片裁剪</li>
-                                <li>占位图 - 加载状态</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">数据库
-                        <div class="detail">
-                            <h4>数据库</h4>
-                            <ul>
-                                <li>Room - 官方ORM</li>
-                                <li>Realm - 移动数据库</li>
-                                <li>SQLite - 原生数据库</li>
-                                <li>GreenDAO - 快速ORM</li>
-                                <li>ORM映射 - 对象关系</li>
-                                <li>数据库迁移 - 版本升级</li>
-                                <li>事务处理 - 数据一致性</li>
-                                <li>索引优化 - 查询性能</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">性能优化
-                        <div class="detail">
-                            <h4>性能优化</h4>
-                            <ul>
-                                <li>内存优化 - 避免泄漏</li>
-                                <li>启动优化 - 冷启动优化</li>
-                                <li>布局优化 - 减少层级</li>
-                                <li>LeakCanary - 内存检测</li>
-                                <li>Systrace - 性能分析</li>
-                                <li>Profiler - 性能监控</li>
-                                <li>卡顿优化 - 流畅度</li>
-                                <li>APK瘦身 - 减小体积</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">架构设计
-                        <div class="detail">
-                            <h4>架构设计</h4>
-                            <ul>
-                                <li>MVVM - 架构模式</li>
-                                <li>MVI - 单向数据流</li>
-                                <li>Clean Architecture - 整洁架构</li>
-                                <li>组件化 - 模块解耦</li>
-                                <li>插件化 - 动态加载</li>
-                                <li>热修复 - 线上修复</li>
-                                <li>模块化 - 功能分离</li>
-                                <li>设计模式 - 代码规范</li>
-                            </ul>
+                    <div class="branch">
+                        <div class="main-node">软件开发</div>
+                        <div class="sub-branches">
+                            <div class="sub-branch">
+                                <div class="sub-node">📱 移动端开发</div>
+                                <div class="detail-nodes">
+                                    <div class="detail-node">
+                                        <div>Android应用开发</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">Kotlin</span>
+                                            <span class="skill-tag">Java</span>
+                                            <span class="skill-tag">Jetpack Compose</span>
+                                            <span class="skill-tag">MVVM</span>
+                                            <span class="skill-tag">Retrofit</span>
+                                            <span class="skill-tag">Room</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>Android Framework</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">Binder IPC</span>
+                                            <span class="skill-tag">AMS</span>
+                                            <span class="skill-tag">WMS</span>
+                                            <span class="skill-tag">Zygote</span>
+                                            <span class="skill-tag">SystemServer</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>跨平台开发</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">Flutter</span>
+                                            <span class="skill-tag">React Native</span>
+                                            <span class="skill-tag">Uni-app</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="sub-branch">
+                                <div class="sub-node">☕ 后端开发</div>
+                                <div class="detail-nodes">
+                                    <div class="detail-node">
+                                        <div>Java后端</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">Spring Boot</span>
+                                            <span class="skill-tag">Spring Cloud</span>
+                                            <span class="skill-tag">MyBatis</span>
+                                            <span class="skill-tag">MySQL</span>
+                                            <span class="skill-tag">Redis</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>微服务架构</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">服务注册发现</span>
+                                            <span class="skill-tag">API网关</span>
+                                            <span class="skill-tag">负载均衡</span>
+                                            <span class="skill-tag">熔断降级</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>中间件</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">RabbitMQ</span>
+                                            <span class="skill-tag">Kafka</span>
+                                            <span class="skill-tag">RocketMQ</span>
+                                            <span class="skill-tag">Elasticsearch</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="sub-branch">
+                                <div class="sub-node">🌐 前端开发</div>
+                                <div class="detail-nodes">
+                                    <div class="detail-node">
+                                        <div>Web开发</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">HTML5</span>
+                                            <span class="skill-tag">CSS3</span>
+                                            <span class="skill-tag">JavaScript</span>
+                                            <span class="skill-tag">TypeScript</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>前端框架</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">React</span>
+                                            <span class="skill-tag">Vue</span>
+                                            <span class="skill-tag">Angular</span>
+                                            <span class="skill-tag">Next.js</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>构建工具</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">Webpack</span>
+                                            <span class="skill-tag">Vite</span>
+                                            <span class="skill-tag">npm/yarn</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="sub-branch">
+                                <div class="sub-node">🔧 DevOps</div>
+                                <div class="detail-nodes">
+                                    <div class="detail-node">
+                                        <div>容器化</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">Docker</span>
+                                            <span class="skill-tag">Kubernetes</span>
+                                            <span class="skill-tag">Helm</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>CI/CD</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">Jenkins</span>
+                                            <span class="skill-tag">GitLab CI</span>
+                                            <span class="skill-tag">GitHub Actions</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>运维监控</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">Prometheus</span>
+                                            <span class="skill-tag">Grafana</span>
+                                            <span class="skill-tag">ELK Stack</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="branch" style="top: 25%; right: 5%; transform: translateY(-50%);">
-                <div class="branch-node fwk">Android Framework</div>
-                <div class="sub-nodes">
-                    <div class="sub-node">系统启动
-                        <div class="detail">
-                            <h4>系统启动</h4>
-                            <ul>
-                                <li>Zygote进程 - 孵化器</li>
-                                <li>SystemServer - 系统服务</li>
-                                <li>BootAnimation - 启动动画</li>
-                                <li>Launcher - 桌面启动</li>
-                                <li>PMS启动 - 包管理服务</li>
-                                <li>AMS启动 - 活动管理服务</li>
-                                <li>启动优化 - 缩短启动时间</li>
-                                <li>开机动画 - 用户体验</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">四大组件
-                        <div class="detail">
-                            <h4>四大组件</h4>
-                            <ul>
-                                <li>AMS - 活动管理服务</li>
-                                <li>PMS - 包管理服务</li>
-                                <li>WMS - 窗口管理服务</li>
-                                <li>ActivityThread - 主线程</li>
-                                <li>Instrumentation - 组件控制</li>
-                                <li>Context上下文 - 资源访问</li>
-                                <li>生命周期管理 - 组件状态</li>
-                                <li>Intent - 组件通信</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">View系统
-                        <div class="detail">
-                            <h4>View系统</h4>
-                            <ul>
-                                <li>Measure - 测量流程</li>
-                                <li>Layout - 布局流程</li>
-                                <li>Draw - 绘制流程</li>
-                                <li>自定义View - 定制组件</li>
-                                <li>ViewGroup - 容器组件</li>
-                                <li>DecorView - 根视图</li>
-                                <li>PhoneWindow - 窗口实现</li>
-                                <li>SurfaceFlinger - 图形合成</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">事件分发
-                        <div class="detail">
-                            <h4>事件分发</h4>
-                            <ul>
-                                <li>TouchEvent - 触摸事件</li>
-                                <li>dispatchTouchEvent - 事件分发</li>
-                                <li>onInterceptTouchEvent - 拦截</li>
-                                <li>onTouchEvent - 事件处理</li>
-                                <li>事件链 - 事件传递链</li>
-                                <li>滑动冲突 - 多指操作</li>
-                                <li>手势识别 - 手势检测</li>
-                                <li>事件序列 - 事件流</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">Binder IPC
-                        <div class="detail">
-                            <h4>Binder IPC</h4>
-                            <ul>
-                                <li>Binder Driver - 内核驱动</li>
-                                <li>AIDL - 接口定义</li>
-                                <li>ServiceManager - 服务管理</li>
-                                <li>Binder通信 - 进程间通信</li>
-                                <li>IPC机制 - 跨进程调用</li>
-                                <li>Parcel - 数据序列化</li>
-                                <li>Binder线程池 - 线程管理</li>
-                                <li>死亡通知 - 进程监控</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">系统服务
-                        <div class="detail">
-                            <h4>系统服务</h4>
-                            <ul>
-                                <li>PMS - 包管理服务</li>
-                                <li>WMS - 窗口管理服务</li>
-                                <li>PKMS - 包管理服务</li>
-                                <li>AMS - 活动管理服务</li>
-                                <li>PMS - 电源管理服务</li>
-                                <li>NotificationManager - 通知服务</li>
-                                <li>TelephonyManager - 电话服务</li>
-                                <li>ConnectivityManager - 网络服务</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">进程管理
-                        <div class="detail">
-                            <h4>进程管理</h4>
-                            <ul>
-                                <li>Process - 进程管理</li>
-                                <li>OOM - 内存溢出</li>
-                                <li>LMK - 低内存杀手</li>
-                                <li>进程优先级 - ADJ值</li>
-                                <li>进程保活 - 后台运行</li>
-                                <li>多进程 - 进程隔离</li>
-                                <li>进程通信 - IPC</li>
-                                <li>进程守护 - 保活策略</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">权限管理
-                        <div class="detail">
-                            <h4>权限管理</h4>
-                            <ul>
-                                <li>Permission - 权限系统</li>
-                                <li>SELinux - 安全增强</li>
-                                <li>运行时权限 - 动态申请</li>
-                                <li>权限组 - 权限分类</li>
-                                <li>权限检查 - 状态查询</li>
-                                <li>权限授予 - 用户授权</li>
-                                <li>权限拒绝 - 异常处理</li>
-                                <li>特殊权限 - 系统权限</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">包管理
-                        <div class="detail">
-                            <h4>包管理</h4>
-                            <ul>
-                                <li>PackageManager - 包管理器</li>
-                                <li>APK - 应用包</li>
-                                <li>安装流程 - 应用安装</li>
-                                <li>卸载流程 - 应用卸载</li>
-                                <li>签名验证 - 安全检查</li>
-                                <li>Manifest解析 - 清单文件</li>
-                                <li>资源加载 - 资源管理</li>
-                                <li>应用信息 - 包信息查询</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">资源管理
-                        <div class="detail">
-                            <h4>资源管理</h4>
-                            <ul>
-                                <li>Resources - 资源管理</li>
-                                <li>AssetManager - 资产管理</li>
-                                <li>资源加载 - 资源访问</li>
-                                <li>资源适配 - 多分辨率</li>
-                                <li>资源混淆 - 资源压缩</li>
-                                <li>资源ID - 资源标识</li>
-                                <li>资源缓存 - 性能优化</li>
-                                <li>资源更新 - 动态加载</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="mindmap-section">
+                <h2>🤖 人工智能</h2>
+                <div class="mindmap right-mindmap">
+                    <div class="vertical-line"></div>
 
-            <div class="branch" style="bottom: 25%; right: 5%; transform: translateY(50%);">
-                <div class="branch-node java">Java后端开发</div>
-                <div class="sub-nodes">
-                    <div class="sub-node">Spring
-                        <div class="detail">
-                            <h4>Spring生态</h4>
-                            <ul>
-                                <li>Spring Boot - 快速开发</li>
-                                <li>Spring Cloud - 微服务</li>
-                                <li>Spring MVC - Web框架</li>
-                                <li>Spring Security - 安全框架</li>
-                                <li>Spring Data - 数据访问</li>
-                                <li>Spring AOP - 面向切面</li>
-                                <li>Spring Batch - 批处理</li>
-                                <li>Spring Integration - 集成框架</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">数据库
-                        <div class="detail">
-                            <h4>数据库技术</h4>
-                            <ul>
-                                <li>MySQL - 关系数据库</li>
-                                <li>Redis - 缓存数据库</li>
-                                <li>MongoDB - 文档数据库</li>
-                                <li>MyBatis - ORM框架</li>
-                                <li>JPA - Java持久化</li>
-                                <li>Hibernate - ORM实现</li>
-                                <li>连接池 - Druid/HikariCP</li>
-                                <li>分库分表 - 数据分片</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">消息队列
-                        <div class="detail">
-                            <h4>消息队列</h4>
-                            <ul>
-                                <li>RabbitMQ - 消息中间件</li>
-                                <li>Kafka - 分布式流处理</li>
-                                <li>RocketMQ - 消息队列</li>
-                                <li>ActiveMQ - 消息服务</li>
-                                <li>消息可靠性 - 事务消息</li>
-                                <li>消息顺序 - 有序消费</li>
-                                <li>消息积压 - 消费优化</li>
-                                <li>消息过滤 - 路由规则</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">微服务
-                        <div class="detail">
-                            <h4>微服务架构</h4>
-                            <ul>
-                                <li>Nacos - 服务发现</li>
-                                <li>Sentinel - 流量控制</li>
-                                <li>Gateway - API网关</li>
-                                <li>Feign - 声明式调用</li>
-                                <li>Ribbon - 负载均衡</li>
-                                <li>Hystrix - 熔断降级</li>
-                                <li>Config - 配置中心</li>
-                                <li>Sleuth - 链路追踪</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">容器化
-                        <div class="detail">
-                            <h4>容器化部署</h4>
-                            <ul>
-                                <li>Docker - 容器技术</li>
-                                <li>Kubernetes - 容器编排</li>
-                                <li>Docker Compose - 容器编排</li>
-                                <li>镜像管理 - 镜像仓库</li>
-                                <li>容器网络 - 网络配置</li>
-                                <li>容器存储 - 数据卷</li>
-                                <li>容器监控 - 性能监控</li>
-                                <li>容器安全 - 安全策略</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">CI/CD
-                        <div class="detail">
-                            <h4>CI/CD</h4>
-                            <ul>
-                                <li>Jenkins - 持续集成</li>
-                                <li>GitLab CI - GitLab集成</li>
-                                <li>GitHub Actions - GitHub自动化</li>
-                                <li>自动化测试 - 测试自动化</li>
-                                <li>自动部署 - 部署自动化</li>
-                                <li>代码审查 - Code Review</li>
-                                <li>版本管理 - 版本控制</li>
-                                <li>回滚机制 - 快速回退</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">高并发
-                        <div class="detail">
-                            <h4>高并发设计</h4>
-                            <ul>
-                                <li>限流 - 流量控制</li>
-                                <li>降级 - 服务降级</li>
-                                <li>负载均衡 - Nginx/LVS</li>
-                                <li>缓存策略 - 多级缓存</li>
-                                <li>异步处理 - 非阻塞IO</li>
-                                <li>连接池 - 连接复用</li>
-                                <li>读写分离 - 数据库优化</li>
-                                <li>分库分表 - 数据分片</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">分布式
-                        <div class="detail">
-                            <h4>分布式系统</h4>
-                            <ul>
-                                <li>分布式锁 - Redis/ZK</li>
-                                <li>分布式事务 - 两阶段提交</li>
-                                <li>分布式缓存 - Redis集群</li>
-                                <li>分布式搜索 - Elasticsearch</li>
-                                <li>分布式日志 - ELK</li>
-                                <li>分布式追踪 - SkyWalking</li>
-                                <li>分布式配置 - Apollo</li>
-                                <li>分布式任务 - XXL-Job</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">JVM调优
-                        <div class="detail">
-                            <h4>JVM调优</h4>
-                            <ul>
-                                <li>GC - 垃圾回收</li>
-                                <li>内存分析 - MAT/JProfiler</li>
-                                <li>类加载 - 类加载机制</li>
-                                <li>线程池 - 线程管理</li>
-                                <li>JIT编译 - 即时编译</li>
-                                <li>内存模型 - JMM</li>
-                                <li>性能监控 - JMX</li>
-                                <li>故障排查 - 问题定位</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">监控
-                        <div class="detail">
-                            <h4>监控告警</h4>
-                            <ul>
-                                <li>Prometheus - 监控系统</li>
-                                <li>Grafana - 可视化</li>
-                                <li>ELK - 日志分析</li>
-                                <li>Zipkin - 链路追踪</li>
-                                <li>SkyWalking - APM</li>
-                                <li>告警规则 - 异常通知</li>
-                                <li>性能指标 - 业务监控</li>
-                                <li>健康检查 - 服务状态</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    <div class="branch">
+                        <div class="main-node">人工智能</div>
+                        <div class="sub-branches">
+                            <div class="sub-branch">
+                                <div class="sub-node">👁️ 计算机视觉</div>
+                                <div class="detail-nodes">
+                                    <div class="detail-node">
+                                        <div>图像分类</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">ResNet</span>
+                                            <span class="skill-tag">EfficientNet</span>
+                                            <span class="skill-tag">ViT</span>
+                                            <span class="skill-tag">Swin Transformer</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>目标检测</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">YOLO</span>
+                                            <span class="skill-tag">Faster R-CNN</span>
+                                            <span class="skill-tag">SSD</span>
+                                            <span class="skill-tag">DETR</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>图像分割</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">U-Net</span>
+                                            <span class="skill-tag">Mask R-CNN</span>
+                                            <span class="skill-tag">DeepLab</span>
+                                            <span class="skill-tag">SAM</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>图像生成</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">GAN</span>
+                                            <span class="skill-tag">Stable Diffusion</span>
+                                            <span class="skill-tag">DALL-E</span>
+                                            <span class="skill-tag">Midjourney</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-            <div class="branch" style="bottom: 5%; left: 50%; transform: translateX(-50%);">
-                <div class="branch-node ai">人工智能</div>
-                <div class="sub-nodes">
-                    <div class="sub-node">LLM
-                        <div class="detail">
-                            <h4>大语言模型</h4>
-                            <ul>
-                                <li>GPT - OpenAI模型</li>
-                                <li>LLaMA - Meta开源模型</li>
-                                <li>Qwen - 通义千问</li>
-                                <li>Claude - Anthropic</li>
-                                <li>文心一言 - 百度</li>
-                                <li>ChatGLM - 清华</li>
-                                <li>Baichuan - 百川智能</li>
-                                <li>模型选型 - 场景匹配</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">Prompt
-                        <div class="detail">
-                            <h4>Prompt工程</h4>
-                            <ul>
-                                <li>提示词设计 - 效果优化</li>
-                                <li>思维链 - CoT推理</li>
-                                <li>少样本学习 - Few-shot</li>
-                                <li>角色设定 - 角色扮演</li>
-                                <li>上下文管理 - 对话历史</li>
-                                <li>提示词模板 - 模板化</li>
-                                <li>提示词评估 - 效果测试</li>
-                                <li>提示词优化 - 迭代改进</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">RAG
-                        <div class="detail">
-                            <h4>检索增强生成</h4>
-                            <ul>
-                                <li>向量检索 - 语义搜索</li>
-                                <li>文档切片 - 文本分块</li>
-                                <li>向量嵌入 - Embedding</li>
-                                <li>重排序 - 结果优化</li>
-                                <li>知识库构建 - 文档管理</li>
-                                <li>混合检索 - 多模态搜索</li>
-                                <li>答案生成 - 内容合成</li>
-                                <li>效果评估 - 质量检测</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">Fine-tuning
-                        <div class="detail">
-                            <h4>模型微调</h4>
-                            <ul>
-                                <li>LoRA - 低秩适应</li>
-                                <li>QLoRA - 量化微调</li>
-                                <li>P-tuning - 提示微调</li>
-                                <li>全量微调 - Full Fine-tuning</li>
-                                <li>指令微调 - Instruction Tuning</li>
-                                <li>RLHF - 人类反馈强化</li>
-                                <li>数据准备 - 训练数据</li>
-                                <li>评估指标 - 效果评测</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">向量数据库
-                        <div class="detail">
-                            <h4>向量数据库</h4>
-                            <ul>
-                                <li>FAISS - Facebook开源</li>
-                                <li>Milvus - 开源向量库</li>
-                                <li>Pinecone - 云端服务</li>
-                                <li>Weaviate - 语义搜索</li>
-                                <li>Chroma - 轻量级</li>
-                                <li>Qdrant - 高性能</li>
-                                <li>索引优化 - 查询加速</li>
-                                <li>相似度计算 - 距离度量</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">Agent
-                        <div class="detail">
-                            <h4>智能体</h4>
-                            <ul>
-                                <li>工具调用 - Function Calling</li>
-                                <li>任务规划 - Task Planning</li>
-                                <li>记忆管理 - Memory</li>
-                                <li>多智能体 - Multi-Agent</li>
-                                <li>自主决策 - Decision Making</li>
-                                <li>环境交互 - Environment</li>
-                                <li>协作机制 - Collaboration</li>
-                                <li>任务分解 - Task Decomposition</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">LangChain
-                        <div class="detail">
-                            <h4>LangChain框架</h4>
-                            <ul>
-                                <li>链式调用 - Chain</li>
-                                <li>提示模板 - PromptTemplate</li>
-                                <li>文档加载 - Document Loader</li>
-                                <li>文本分割 - Text Splitter</li>
-                                <li>向量存储 - Vector Store</li>
-                                <li>检索器 - Retriever</li>
-                                <li>代理 - Agent</li>
-                                <li>记忆组件 - Memory</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">算法部署
-                        <div class="detail">
-                            <h4>算法部署</h4>
-                            <ul>
-                                <li>Python - NumPy、Pandas</li>
-                                <li>机器学习 - Scikit-learn</li>
-                                <li>深度学习 - PyTorch、TF</li>
-                                <li>模型部署 - ONNX、TensorRT</li>
-                                <li>服务部署 - Flask、FastAPI</li>
-                                <li>数据预处理 - ETL</li>
-                                <li>模型优化 - 量化、剪枝</li>
-                                <li>MLOps - MLflow、DVC</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                            <div class="sub-branch">
+                                <div class="sub-node">📝 自然语言处理</div>
+                                <div class="detail-nodes">
+                                    <div class="detail-node">
+                                        <div>预训练模型</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">BERT</span>
+                                            <span class="skill-tag">GPT</span>
+                                            <span class="skill-tag">T5</span>
+                                            <span class="skill-tag">LLaMA</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>文本分类</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">情感分析</span>
+                                            <span class="skill-tag">文本分类</span>
+                                            <span class="skill-tag">命名实体识别</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>文本生成</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">机器翻译</span>
+                                            <span class="skill-tag">文本摘要</span>
+                                            <span class="skill-tag">对话系统</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-            <div class="branch" style="bottom: 25%; left: 5%; transform: translateY(50%);">
-                <div class="branch-node common">通用技能</div>
-                <div class="sub-nodes">
-                    <div class="sub-node">Git
-                        <div class="detail">
-                            <h4>Git版本控制</h4>
-                            <ul>
-                                <li>版本控制 - 代码管理</li>
-                                <li>分支管理 - Git Flow</li>
-                                <li>合并冲突 - Conflict</li>
-                                <li>回滚操作 - Reset/Revert</li>
-                                <li>远程协作 - Remote</li>
-                                <li>代码审查 - Pull Request</li>
-                                <li>标签管理 - Tag</li>
-                                <li>子模块 - Submodule</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">Linux
-                        <div class="detail">
-                            <h4>Linux系统</h4>
-                            <ul>
-                                <li>Shell脚本 - Bash</li>
-                                <li>系统管理 - Systemd</li>
-                                <li>文件系统 - Linux FS</li>
-                                <li>进程管理 - Process</li>
-                                <li>网络配置 - Network</li>
-                                <li>权限管理 - Permission</li>
-                                <li>日志分析 - Log</li>
-                                <li>性能监控 - Top/Htop</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">网络
-                        <div class="detail">
-                            <h4>网络协议</h4>
-                            <ul>
-                                <li>HTTP/HTTPS - Web协议</li>
-                                <li>TCP/IP - 传输协议</li>
-                                <li>Socket - 网络编程</li>
-                                <li>RESTful - API设计</li>
-                                <li>WebSocket - 实时通信</li>
-                                <li>网络安全 - SSL/TLS</li>
-                                <li>网络优化 - 性能调优</li>
-                                <li>CDN - 内容分发</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">算法
-                        <div class="detail">
-                            <h4>算法数据结构</h4>
-                            <ul>
-                                <li>数据结构 - 数组、链表</li>
-                                <li>树结构 - 二叉树、B树</li>
-                                <li>图算法 - BFS、DFS</li>
-                                <li>排序算法 - 快排、归并</li>
-                                <li>查找算法 - 二分查找</li>
-                                <li>动态规划 - DP</li>
-                                <li>贪心算法 - Greedy</li>
-                                <li>回溯算法 - Backtracking</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">设计模式
-                        <div class="detail">
-                            <h4>设计模式</h4>
-                            <ul>
-                                <li>创建型 - 单例、工厂</li>
-                                <li>结构型 - 适配器、代理</li>
-                                <li>行为型 - 观察者、策略</li>
-                                <li>单例模式 - Singleton</li>
-                                <li>工厂模式 - Factory</li>
-                                <li>观察者模式 - Observer</li>
-                                <li>策略模式 - Strategy</li>
-                                <li>适配器模式 - Adapter</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">测试
-                        <div class="detail">
-                            <h4>测试技术</h4>
-                            <ul>
-                                <li>单元测试 - JUnit</li>
-                                <li>集成测试 - Integration</li>
-                                <li>UI测试 - Espresso</li>
-                                <li>性能测试 - JMeter</li>
-                                <li>Mock测试 - Mockito</li>
-                                <li>测试覆盖率 - Coverage</li>
-                                <li>自动化测试 - Automation</li>
-                                <li>压力测试 - Load Test</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">文档
-                        <div class="detail">
-                            <h4>文档编写</h4>
-                            <ul>
-                                <li>Markdown - 文档格式</li>
-                                <li>API文档 - Swagger</li>
-                                <li>技术文档 - Tech Doc</li>
-                                <li>架构文档 - Architecture</li>
-                                <li>用户文档 - User Guide</li>
-                                <li>代码注释 - Comment</li>
-                                <li>README - 项目说明</li>
-                                <li>Wiki - 知识库</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">工具
-                        <div class="detail">
-                            <h4>开发工具</h4>
-                            <ul>
-                                <li>IDE - Android Studio</li>
-                                <li>调试工具 - Debugger</li>
-                                <li>性能分析 - Profiler</li>
-                                <li>抓包工具 - Charles</li>
-                                <li>反编译工具 - Apktool</li>
-                                <li>版本管理 - Git</li>
-                                <li>构建工具 - Gradle</li>
-                                <li>持续集成 - Jenkins</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">软技能
-                        <div class="detail">
-                            <h4>软技能</h4>
-                            <ul>
-                                <li>沟通能力 - Communication</li>
-                                <li>团队协作 - Teamwork</li>
-                                <li>学习能力 - Learning</li>
-                                <li>问题解决 - Problem Solving</li>
-                                <li>时间管理 - Time Management</li>
-                                <li>项目管理 - Project Management</li>
-                                <li>领导力 - Leadership</li>
-                                <li>创新思维 - Innovation</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">英语
-                        <div class="detail">
-                            <h4>英语能力</h4>
-                            <ul>
-                                <li>技术文档 - Tech Doc</li>
-                                <li>API文档 - API Doc</li>
-                                <li>源码阅读 - Source Code</li>
-                                <li>技术博客 - Tech Blog</li>
-                                <li>Stack Overflow - 问答</li>
-                                <li>GitHub - 开源项目</li>
-                                <li>技术论文 - Paper</li>
-                                <li>技术交流 - Communication</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                            <div class="sub-branch">
+                                <div class="sub-node">🚀 LLM部署</div>
+                                <div class="detail-nodes">
+                                    <div class="detail-node">
+                                        <div>推理框架</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">vLLM</span>
+                                            <span class="skill-tag">TensorRT-LLM</span>
+                                            <span class="skill-tag">TGI</span>
+                                            <span class="skill-tag">Text Generation Inference</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>服务部署</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">LangChain</span>
+                                            <span class="skill-tag">LlamaIndex</span>
+                                            <span class="skill-tag">FastAPI</span>
+                                            <span class="skill-tag">Ray Serve</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>API集成</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">OpenAI API</span>
+                                            <span class="skill-tag">Anthropic API</span>
+                                            <span class="skill-tag">Hugging Face API</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-            <div class="branch" style="top: 25%; left: 5%; transform: translateY(-50%);">
-                <div class="branch-node project">项目管理</div>
-                <div class="sub-nodes">
-                    <div class="sub-node">敏捷开发
-                        <div class="detail">
-                            <h4>敏捷开发</h4>
-                            <ul>
-                                <li>Scrum - 敏捷框架</li>
-                                <li>Kanban - 看板方法</li>
-                                <li>迭代开发 - Iteration</li>
-                                <li>每日站会 - Daily Standup</li>
-                                <li>回顾会议 - Retrospective</li>
-                                <li>用户故事 - User Story</li>
-                                <li>冲刺计划 - Sprint Planning</li>
-                                <li>持续交付 - CD</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">需求管理
-                        <div class="detail">
-                            <h4>需求管理</h4>
-                            <ul>
-                                <li>需求分析 - Requirement</li>
-                                <li>需求文档 - PRD</li>
-                                <li>原型设计 - Prototype</li>
-                                <li>需求评审 - Review</li>
-                                <li>需求变更 - Change</li>
-                                <li>优先级管理 - Priority</li>
-                                <li>需求跟踪 - Traceability</li>
-                                <li>需求验证 - Validation</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">风险管理
-                        <div class="detail">
-                            <h4>风险管理</h4>
-                            <ul>
-                                <li>风险识别 - Identification</li>
-                                <li>风险评估 - Assessment</li>
-                                <li>风险应对 - Response</li>
-                                <li>风险监控 - Monitoring</li>
-                                <li>技术风险 - Technical</li>
-                                <li>进度风险 - Schedule</li>
-                                <li>资源风险 - Resource</li>
-                                <li>质量风险 - Quality</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">团队协作
-                        <div class="detail">
-                            <h4>团队协作</h4>
-                            <ul>
-                                <li>团队建设 - Team Building</li>
-                                <li>代码评审 - Code Review</li>
-                                <li>知识分享 - Knowledge Share</li>
-                                <li>技术培训 - Training</li>
-                                <li>沟通协调 - Communication</li>
-                                <li>冲突解决 - Conflict</li>
-                                <li>激励机制 - Motivation</li>
-                                <li>文化建设 - Culture</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">进度管理
-                        <div class="detail">
-                            <h4>进度管理</h4>
-                            <ul>
-                                <li>项目计划 - Planning</li>
-                                <li>里程碑 - Milestone</li>
-                                <li>甘特图 - Gantt Chart</li>
-                                <li>进度跟踪 - Tracking</li>
-                                <li>延期预警 - Warning</li>
-                                <li>资源分配 - Allocation</li>
-                                <li>关键路径 - Critical Path</li>
-                                <li>进度报告 - Report</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">质量管理
-                        <div class="detail">
-                            <h4>质量管理</h4>
-                            <ul>
-                                <li>质量标准 - Standard</li>
-                                <li>代码规范 - Code Style</li>
-                                <li>测试策略 - Test Strategy</li>
-                                <li>缺陷管理 - Bug Tracking</li>
-                                <li>质量度量 - Metrics</li>
-                                <li>持续改进 - Improvement</li>
-                                <li>质量保证 - QA</li>
-                                <li>质量审查 - Review</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">成本管理
-                        <div class="detail">
-                            <h4>成本管理</h4>
-                            <ul>
-                                <li>成本估算 - Estimation</li>
-                                <li>预算制定 - Budget</li>
-                                <li>成本控制 - Control</li>
-                                <li>资源优化 - Optimization</li>
-                                <li>ROI分析 - Return</li>
-                                <li>成本效益 - Cost-Benefit</li>
-                                <li>资源采购 - Procurement</li>
-                                <li>成本报告 - Report</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">沟通管理
-                        <div class="detail">
-                            <h4>沟通管理</h4>
-                            <ul>
-                                <li>沟通计划 - Plan</li>
-                                <li>干系人管理 - Stakeholder</li>
-                                <li>会议管理 - Meeting</li>
-                                <li>文档管理 - Document</li>
-                                <li>汇报机制 - Reporting</li>
-                                <li>信息共享 - Sharing</li>
-                                <li>反馈收集 - Feedback</li>
-                                <li>冲突协调 - Coordination</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">工具使用
-                        <div class="detail">
-                            <h4>项目管理工具</h4>
-                            <ul>
-                                <li>Jira - 任务管理</li>
-                                <li>Confluence - 文档协作</li>
-                                <li>Trello - 看板工具</li>
-                                <li>Notion - 知识库</li>
-                                <li>Slack - 团队沟通</li>
-                                <li>Zoom - 视频会议</li>
-                                <li>GitLab - 代码托管</li>
-                                <li>Microsoft Project - 项目规划</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sub-node">交付管理
-                        <div class="detail">
-                            <h4>交付管理</h4>
-                            <ul>
-                                <li>发布计划 - Release</li>
-                                <li>版本管理 - Version</li>
-                                <li>部署策略 - Deployment</li>
-                                <li>回滚机制 - Rollback</li>
-                                <li>用户验收 - UAT</li>
-                                <li>上线监控 - Monitoring</li>
-                                <li>问题修复 - Bug Fix</li>
-                                <li>后续维护 - Maintenance</li>
-                            </ul>
+                            <div class="sub-branch">
+                                <div class="sub-node">⚡ 模型量化</div>
+                                <div class="detail-nodes">
+                                    <div class="detail-node">
+                                        <div>量化方法</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">INT8量化</span>
+                                            <span class="skill-tag">INT4量化</span>
+                                            <span class="skill-tag">FP16/BF16</span>
+                                            <span class="skill-tag">混合精度</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>量化工具</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">GPTQ</span>
+                                            <span class="skill-tag">AWQ</span>
+                                            <span class="skill-tag">Bitsandbytes</span>
+                                            <span class="skill-tag">AutoGPTQ</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>模型压缩</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">剪枝</span>
+                                            <span class="skill-tag">蒸馏</span>
+                                            <span class="skill-tag">LoRA</span>
+                                            <span class="skill-tag">QLoRA</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="sub-branch">
+                                <div class="sub-node">🔬 深度学习框架</div>
+                                <div class="detail-nodes">
+                                    <div class="detail-node">
+                                        <div>主流框架</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">PyTorch</span>
+                                            <span class="skill-tag">TensorFlow</span>
+                                            <span class="skill-tag">JAX</span>
+                                            <span class="skill-tag">Keras</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>训练工具</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">Hugging Face</span>
+                                            <span class="skill-tag">Weights & Biases</span>
+                                            <span class="skill-tag">MLflow</span>
+                                            <span class="skill-tag">TensorBoard</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>数据处理</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">Datasets</span>
+                                            <span class="skill-tag">Albumentations</span>
+                                            <span class="skill-tag">Pillow</span>
+                                            <span class="skill-tag">OpenCV</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="sub-branch">
+                                <div class="sub-node">🎯 MLOps</div>
+                                <div class="detail-nodes">
+                                    <div class="detail-node">
+                                        <div>实验管理</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">MLflow</span>
+                                            <span class="skill-tag">Weights & Biases</span>
+                                            <span class="skill-tag">Neptune</span>
+                                            <span class="skill-tag">Comet</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>模型部署</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">Kubeflow</span>
+                                            <span class="skill-tag">MLflow Serving</span>
+                                            <span class="skill-tag">Seldon</span>
+                                            <span class="skill-tag">BentoML</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-node">
+                                        <div>数据版本控制</div>
+                                        <div class="skill-tags">
+                                            <span class="skill-tag">DVC</span>
+                                            <span class="skill-tag">Git LFS</span>
+                                            <span class="skill-tag">LakeFS</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        function updateConnectors() {
-            const svg = document.querySelector('.connector');
-            const centerNode = document.querySelector('.center-node');
-            const branches = document.querySelectorAll('.branch');
-
-            const centerRect = centerNode.getBoundingClientRect();
-            const centerX = centerRect.left + centerRect.width / 2;
-            const centerY = centerRect.top + centerRect.height / 2;
-
-            const lines = svg.querySelectorAll('.connector-line');
-
-            branches.forEach((branch, index) => {
-                const branchNode = branch.querySelector('.branch-node');
-                const branchRect = branchNode.getBoundingClientRect();
-                const branchX = branchRect.left + branchRect.width / 2;
-                const branchY = branchRect.top + branchRect.height / 2;
-
-                if (lines[index]) {
-                    lines[index].setAttribute('x1', centerX);
-                    lines[index].setAttribute('y1', centerY);
-                    lines[index].setAttribute('x2', branchX);
-                    lines[index].setAttribute('y2', branchY);
-                }
-            });
-        }
-
-        window.addEventListener('load', updateConnectors);
-        window.addEventListener('resize', updateConnectors);
-    </script>
 </body>
 </html>
